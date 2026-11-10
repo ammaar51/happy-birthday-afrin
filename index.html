@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <title>Happyy Birthday Afrin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #f9f6f1;
+      --muted: #c9c4c0;
+      --gold: #e8c982;
+      --rose: #d98e9a;
+      --night: #111827;
+      --panel: rgba(26, 34, 52, 0.82);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 15%, rgba(216, 142, 154, .22), transparent 30%),
+        radial-gradient(circle at 88% 82%, rgba(232, 201, 130, .14), transparent 32%),
+        var(--night);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    body::before,
+    body::after {
+      position: fixed;
+      z-index: -1;
+      width: 18rem;
+      height: 18rem;
+      border: 1px solid rgba(232, 201, 130, .18);
+      border-radius: 50%;
+      content: "";
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+
+    body::before { top: -9rem; right: -5rem; }
+    body::after { bottom: -11rem; left: -7rem; animation-delay: -5s; }
+
+    .page {
+      display: grid;
+      min-height: 100vh;
+      place-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: minmax(260px, .82fr) minmax(320px, 1.18fr);
+      width: min(100%, 980px);
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 28px;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .4);
+      backdrop-filter: blur(18px);
+      animation: appear .9s ease both;
+    }
+
+    .portrait {
+      position: relative;
+      min-height: 620px;
+      overflow: hidden;
+    }
+
+    .portrait img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 620px;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(.88);
+    }
+
+    .portrait::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 48%, rgba(10, 14, 24, .86) 100%);
+      content: "";
+    }
+
+    .portrait-caption {
+      position: absolute;
+      z-index: 1;
+      right: 2rem;
+      bottom: 1.8rem;
+      left: 2rem;
+    }
+
+    .portrait-caption span,
+    .eyebrow {
+      color: var(--gold);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .portrait-caption h1 {
+      max-width: 13rem;
+      margin: .55rem 0 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: .98;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(2rem, 5vw, 4.5rem);
+    }
+
+    .eyebrow { margin-bottom: 1.2rem; }
+
+    .content h2 {
+      margin: 0 0 .85rem;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+      font-weight: 600;
+    }
+
+    .intro {
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+      font-size: .98rem;
+      line-height: 1.7;
+    }
+
+    .dua {
+      position: relative;
+      margin: 0;
+      padding: 1.35rem 1.4rem 1.35rem 1.55rem;
+      border-left: 2px solid var(--rose);
+      color: #f1ece9;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.05rem, 1.65vw, 1.2rem);
+      line-height: 1.72;
+    }
+
+    .dua::before {
+      position: absolute;
+      top: -.35rem;
+      left: -.05rem;
+      color: var(--rose);
+      font-size: 3rem;
+      line-height: 1;
+      content: "“";
+    }
+
+    .closing {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.7rem;
+      padding-top: 1.35rem;
+      border-top: 1px solid rgba(255, 255, 255, .12);
+      color: var(--muted);
+      font-size: .87rem;
+      line-height: 1.6;
+    }
+
+    .time {
+      color: var(--gold);
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .sparkles i {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 14px var(--gold);
+      opacity: .7;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .sparkles i:nth-child(1) { top: 16%; left: 8%; }
+    .sparkles i:nth-child(2) { top: 25%; right: 13%; animation-delay: 1s; }
+    .sparkles i:nth-child(3) { bottom: 18%; left: 20%; animation-delay: 1.8s; }
+    .sparkles i:nth-child(4) { bottom: 12%; right: 8%; animation-delay: .5s; }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes drift {
+      to { transform: translate(20px, -15px) scale(1.08); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { transform: scale(.65); opacity: .25; }
+      50% { transform: scale(1.5); opacity: 1; }
+    }
+
+    @media (max-width: 700px) {
+      .page { padding: 1rem; }
+      .card { grid-template-columns: 1fr; border-radius: 22px; }
+      .portrait, .portrait img { min-height: 360px; height: 360px; }
+      .portrait-caption { right: 1.5rem; bottom: 1.4rem; left: 1.5rem; }
+      .portrait-caption h1 { font-size: 2.7rem; }
+      .content { padding: 2rem 1.5rem 2.2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <main class="page">
+    <article class="card">
+      <div class="portrait">
+        <img src="Afrin.jpeg" alt="Afrin smiling in front of a wooden door">
+        <div class="portrait-caption">
+          <span>For you, Afrin</span>
+          <h1>Keep<br>shining.</h1>
+        </div>
+      </div>
+
+      <section class="content" aria-labelledby="dua-title">
+        <div class="eyebrow">A heartfelt dua</div>
+        <h2 id="dua-title">May Allah bless you.</h2>
+        <p class="intro">A little reminder that someone is always making dua for your happiness and success.</p>
+        <blockquote class="dua">
+          May Allah bless you with endless happiness, success, good health, and everything that is khair for you. May He fill your life with barakah, protect your smile, ease every difficulty, and grant you all the beautiful things your heart makes dua for.
+          <br><br>
+          Never stop smiling, keep shining, and always stay the beautiful soul you are. May Allah guide you towards what's best in this dunya and grant you the best in the Akhirah.
+          <br><br>
+          And remember, someone is silently making dua for your happiness and success. 💙✨
+          <br><br>
+          May Allah always keep you under His protection. Ameen. 🤍🫶🏻🎀
+        </blockquote>
+        <div class="closing">
+          <span>With sincere duas for you,<br>always.<br><strong>— Ammar</strong></span>
+          <span class="time">11:11</span>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
